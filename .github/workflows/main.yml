@@ -19,7 +19,7 @@ jobs:
         NAME: Loganysl
       with:
         arch: arm64
-        compiler: gcc/10
+        compiler: clang/15
         defconfig: ysl-perf_defconfig
         image: Image.gz-dtb
 
