@@ -2,7 +2,8 @@ name: Kernel Build
 
 on:
   push:
-    tags: '*'
+    branches:
+      - xr
 
 jobs:
   build:
