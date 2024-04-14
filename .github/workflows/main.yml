@@ -1,0 +1,35 @@
+name: Kernel Build
+
+on:
+  push:
+    tags: '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout kernel source
+      uses: actions/checkout@v4
+
+    - name: Checkout zipper
+      uses: actions/checkout@v4
+      with:
+        repository: lemniskett/AnyKernel3
+        path: zipper
+
+    - name: Android kernel build
+      uses: lemniskett/android-kernel-actions@master
+      id: build
+      env:
+        NAME: Loganysl
+      with:
+        arch: arm64
+        compiler: gcc/10
+        defconfig: ysl-perf_defconfig
+        image: Image.gz-dtb
+
+    - name: Upload Kernel
+      uses: actions/upload-artifact@v4
+      with:
+        name: Loganysl
+        path: ${{ steps.build.outputs.outfile }}
