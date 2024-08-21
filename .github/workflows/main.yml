@@ -26,7 +26,12 @@ jobs:
         compiler: gcc/12
         defconfig: ysl-perf_defconfig
         image: Image.gz-dtb
-
+    
+    - name: Log directory structure to find the module
+      run: |
+        find . -type f -name "*.ko"
+        find . -type d
+  
     - name: Upload Kernel and Module
       uses: actions/upload-artifact@v4
       with:
