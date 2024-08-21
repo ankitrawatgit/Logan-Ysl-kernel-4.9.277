@@ -38,4 +38,4 @@ jobs:
         name: module
         path: |
           ${{ steps.build.outputs.outfile }}
-          ./anrwt.ko
+          ./out/drivers/memkernel/memkernel.ko
