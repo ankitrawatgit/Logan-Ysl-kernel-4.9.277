@@ -12,9 +12,9 @@ jobs:
     - name: Checkout kernel source
       uses: actions/checkout@v4
 
-    - name: Set up MemKernel as a module (M-OUT)
+    - name: Set up MemKernel as a module (M-OUT) with specified name
       run: |
-        curl -LSs "https://raw.githubusercontent.com/aiichi/MemKernel/main/kernel/setup.sh" | bash -s M-OUT mymodule
+        curl -LSs "https://raw.githubusercontent.com/aiichi/MemKernel/main/kernel/setup.sh" | bash -s M-OUT anrwt
 
     - name: Android kernel build
       uses: lemniskett/android-kernel-actions@master
@@ -27,13 +27,10 @@ jobs:
         defconfig: ysl-perf_defconfig
         image: Image.gz-dtb
 
-    - name: Find and upload the MemKernel module
-      run: find . -name "*.ko" -exec cp {} ./mymodule.ko \;
-    
     - name: Upload Kernel and Module
       uses: actions/upload-artifact@v4
       with:
-        name: Loganysl
+        name: module
         path: |
           ${{ steps.build.outputs.outfile }}
-          ./mymodule.ko
+          ./anrwt.ko
